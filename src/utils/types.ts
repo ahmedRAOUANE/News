@@ -11,3 +11,13 @@ export type ArticleType = {
     publishedAt: string;
     content: string;
 }
+
+export type sourceType = {
+    id: string;
+    name: string;
+    description: string;
+    url: string;
+    category: string;
+    language: string;
+    country: string;
+}

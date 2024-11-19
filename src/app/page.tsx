@@ -1,21 +1,27 @@
 import { getTopHeadlines } from "@/actions/actions";
+import Header from "@/components/Header";
+import NewsCard from "@/components/NewsCard";
+import Sidebar from "@/components/Sidebar";
 import { ArticleType } from "@/utils/types";
 
-export default async function Home() {
-  const topHeadlines = await getTopHeadlines();
+export default async function Home({ searchParams }: { searchParams: Promise<{ sources?: string }> }) {
+  const source = (await searchParams).sources || "abc-news";
+
+  const topHeadlines = await getTopHeadlines(source);
 
   return (
-    <main className="container px-5 m-auto">
-      <h1>Hello there!</h1>
+    <main className="grid grid-cols-1 md:grid-cols-4 lg:grid-cols-5 grid-rows-auto h-screen">
+      <Sidebar />
 
-      <div>
-        {topHeadlines.articles.map((article: ArticleType) => (
-          <div key={article.url} className="mb-5 border border-gray-200 rounded-lg p-3 bg-slate-300">
-            <h2>{article.title}</h2>
-            <p>{article.description}</p>
-          </div>
+      <Header source={source} />
+
+      {/* <Body /> */}
+      <div className="col-span-4 row-auto overflow-y-scroll h-full p-3 grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-3">
+        {topHeadlines?.articles.map((article: ArticleType) => (
+          <NewsCard key={article.title} article={article} />
         ))}
       </div>
     </main>
   );
 }
+
