@@ -2,8 +2,8 @@ import Header from '@/components/Header'
 import Sidebar from '@/components/Sidebar'
 import React from 'react'
 
-const ArticlePage = async ({ params }: { params: { articleTitle: string } }) => {
-    const { articleTitle } = await params;
+const ArticlePage = async ({ params }: { params: Promise<{ articleTitle: string }> }) => {
+    const articleTitle = (await params).articleTitle;
 
     const apiKey = process.env.NEXT_PUBLIC_NEWS_API_KEY;
 
