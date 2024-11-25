@@ -10,7 +10,6 @@ export default function Error({
     reset: () => void
 }) {
     useEffect(() => {
-        // Log the error to an error reporting service
         console.error(error)
     }, [error])
 
@@ -20,7 +19,13 @@ export default function Error({
                 <div className='flex flex-col gap-3'>
                     <div className='flex flex-col'> 
                         <h2 className='px-3 py-2 text-3xl mb-3'>Something went wrong!</h2>
-                        <p>{error.message}</p>
+
+                        <div className='text-start text-gray-500 ps-20'>
+                            {/* <p>{error.message}</p> */}
+                            <p>We have a trouble with the service, mostly from the sever.</p>
+                            <p>we apologize that we can not serve you to day</p>
+                            <p>try again later...</p>
+                        </div>
                     </div>
 
                     <div className='flex flex-col items-start gap-2'>
@@ -36,7 +41,6 @@ export default function Error({
 
                 <button
                     onClick={
-                        // Attempt to recover by trying to re-render the segment
                         () => reset()
                     }
 

@@ -21,3 +21,23 @@ export type sourceType = {
     language: string;
     country: string;
 }
+
+export type ModalType = "" | "login" | "register" | "category" | "filters";
+
+export interface ModalStateType {
+    isOpen: boolean;
+    type: ModalType;
+}
+
+export type FiltersType = "sources" | "category" | "country" | "language" | "keywords" | "from" | "to" | "sort";
+
+export interface FilterParams {
+    sources?: string;
+    category?: string;
+    country?: string;
+    language?: string;
+    keywords?: string;
+    from?: string;
+    to?: string;
+    sort?: string;
+}

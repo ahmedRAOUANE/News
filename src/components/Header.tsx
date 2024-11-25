@@ -1,11 +1,18 @@
-import React from 'react'
+"use client";
+
+import { useSearchParams } from 'next/navigation';
 import { IoMdSearch } from 'react-icons/io'
 import { IoSettingsSharp } from 'react-icons/io5'
 import { MdKeyboardArrowRight } from 'react-icons/md'
 
-const Header = ({ source }: { source?: string }) => {
+const Header = () => {
+    const searchParams = useSearchParams(); 
+    const entries = Object.fromEntries(searchParams.entries()); 
+    const filter = Object.keys(entries);
+    const filterOption = Object.values(entries);
+
     return (
-        <header className="col-span-4 border border-gray-300 row-auto shadow-lg flex justify-between items-center py-2">
+        <header className="col-span-4 border border-gray-300 row-span-1 shadow-lg flex justify-between items-center py-2">
             <h1 className="px-3 text-xl flex justify-start items-center gap-1">
                 <span>
                     Top Headlines
@@ -15,7 +22,8 @@ const Header = ({ source }: { source?: string }) => {
                     <MdKeyboardArrowRight />
                 </span>
 
-                <span>{source}</span>
+                <span className='font-bold text-blue-500'>{filterOption}</span>
+                <span>{filter}</span>
             </h1>
 
             <div className="px-3 flex gap-3">
@@ -32,3 +40,4 @@ const Header = ({ source }: { source?: string }) => {
 }
 
 export default Header
+
